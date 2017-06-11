@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+  
+  
+  <title>My home page</title>
+</head>
+
+
+<body>
+
+
+<h1><span style="font-weight: bold;">Project 788</span></h1>
+
+<h1><span style="font-weight: bold;">Name: Ayan Biswas</span></h1>
+
+<h1><span style="font-weight: bold;">Contact: biswas.36@osu.edu (or) ayanju04@gmail.com</span></h1>
+
+
+
+<br>
+
+
+
+This is a project where I am working at generating "Continuous Scatter
+Plot" for continuous input data rather than showing the discrete
+scatter plot. The data is given in 3-Dimensional spatial domain (x,y
+and z coordinates) and 1-Dimensional scalar data. I take the gradient
+of the scalar data to make the scalar data 2-dimensional and then work
+on the algorithm to output the continuous scatter plot. I am working on
+the case from the paper &nbsp;(m &lt; n) which is mostly found in the
+regular datasets.<br>
+
+
+<br>
+
+
+Here is my <a href="project_proposal.html">project proposal</a><br>
+
+
+<br>
+
+
+<a href="http://www.vis.uni-stuttgart.de/%7Ebachthsn/publications/VIS08/VIS08_Final.pdf">Paper Reference : Continuous Scatter Plot</a><br>
+
+
+<br>
+
+
+<h3>Progress in the Project</h3>
+
+
+1. Collected the input dataset. This data set is 3-D(spatial) X 1-D(scalar).<br>
+<br>
+2. Read the input dataset into an array. I used my own code for this. I
+did not use NrrdIO library because I had troubles compiling that for
+windows.<br>
+<br>
+
+
+3. Calculate the gradient of the input scalar data and store in the
+array. Now we have 3-D(spatial) X 2-D(scalar) data set as the input.<br>
+<br>
+
+
+4. The input mesh is broken into cubes.<br>
+<br>
+
+
+5. Each cube is decomposed into six tetrahedrons. (No cracking problem)<br>
+<br>
+
+
+6. Now each tetrahedron is projected into data space and is further divided into triangles.<br>
+<br>
+7. Each triangle has 3 points each of which has two scalar values. I
+calculate the IsoSurfaces for the traingle vertices' scalar values.
+Inside the tetrahedron, the Isosurface is a triangle.
+This&nbsp;algorithm which finds the Isosurface inside the tetrahedron
+is written by me. I did not use any of the&nbsp;existing &nbsp;marching
+tetrahedron library already available inside OSU.<br>
+<br>
+
+
+8. For each vertex, we have two triangles for the two scalar values.
+Now I calculate the intersection of the two triangles. This is a
+straight line. The length of the line is calculated and stored.<br>
+<br>
+
+
+9. Volume measure is calculated as the cross product of the gradient of the two scalar values.<br>
+<br>
+
+
+10. Divide the line length by volume measure and use this value to look
+up from a predefined color map and assign the color to the vertex.<br>
+<br>
+
+
+11. Using OpenGL, I repeat these steps for all the triangles and their vertices and draw on screen with additive blending.<br>
+
+
+<br>
+
+
+<h3>Results</h3>
+
+
+I have tested my code on a few datasets. I have computed the
+discrete scatter plot first. Then I got the continuous scatter
+&nbsp;plot. I am attaching the results for shockwave.raw and teddybear.raw&nbsp;below.<br>
+<br>
+The scalar data is in the X-axis and the gradient of the scalar data is in the Y-axis for the output scatter plots.<br>
+
+
+<br>
+
+
+<span style="font-weight: bold;">shockwave.raw &nbsp;(64x64x512)<br>
+
+<br>
+
+</span>
+<img style="width: 814px; height: 635px;" alt="Shockwave_discrete plot" title="Shockwave_discrete plot" src="me1.jpg"><br>
+
+
+<br>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">Discrete Scatter Plot </span><br>
+
+<br>
+
+<br>
+
+
+<img style="width: 814px; height: 615px;" alt="Shockwave continuous scatter plot" title="Shockwave continuous scatter plot" src="shockwave_cont_1.jpg"><br>
+
+
+<br>
+
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; <span style="font-weight: bold;">Continuous Scatter Plot &nbsp;<br>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; (Red color shows lowest density, then yellow and
+then white shows the highest density)<br>
+
+<br>
+
+<br>
+
+Teddybear.raw (62x128x128)<br>
+
+<br>
+
+<img style="width: 814px; height: 631px;" alt="Teddybear discrete scatter plot" src="teddy_discrete.jpg"><br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;Discrete Scatter Plot<br>
+
+<br>
+
+<img style="width: 814px; height: 639px;" alt="Teddybear continuous scatter plot" title="Teddybear continuous scatter plot" src="teddy_cont.jpg"><br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Continuous Scatter Plot<br>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; (Blue is the lowest density here, then pink and the
+highest density is shown by white color)<br>
+
+<br>
+
+<br>
+
+</span>
+<br>
+
+
+<h3>Remaining works</h3>
+
+Extend the code for functions which are partially constant (The case where the volume measure is 0).<br>
+
+<br>
+
+<h3>Final Presentation can be found <a href="Continuous%20Scatter%20Plot.pptx">here</a></h3>
+
+
+</body>
+</html>

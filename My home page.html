@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>My home page</title>
+</head>
+<body>
+<h1><span style="font-weight: bold;">Project 788</span></h1>
+<br>
+Name: Ayan Biswas
+Contact: biswas.36@osu.edu (or) ayanju04@gmail.com
+
+This is a project where I am working at generating "Continuous Scatter
+Plot" for continuous input data rather than showing the discrete
+scatter plot. The data is given in 3-Dimensional spatial domain (x,y
+and z coordinates) and 1-Dimensional scalar data. I take the gradient
+of the scalar data to make the scalar data 2-dimensional and then work
+on the algorithm to output the continuous scatter plot. I am working on
+the case from the paper &nbsp;(m &lt; n) which is mostly found in the
+regular datasets.<br>
+<br>
+Here is my <a href="file:///Z:/WWW/project_proposal.html">project proposal</a><br>
+<br>
+<a href="http://www.vis.uni-stuttgart.de/%7Ebachthsn/publications/VIS08/VIS08_Final.pdf">Paper Reference : Continuous Scatter Plot</a><br>
+<br>
+<h3>Progress in the Project</h3>
+1. Collected the input dataset. This data set is 3-D(spatial) X 1-D(scalar).<br>
+2. Read the input dataset into an array.<br>
+3. Calculate the gradient of the input scalar data and store in the
+array. Now we have 3-D(spatial) X 2-D(scalar) data set as the input.<br>
+4. The input mesh is broken into cubes.<br>
+5. Each cube is decomposed into six tetrahedrons. (No cracking problem)<br>
+6. Now each tetrahedron is projected into data space and is further divided into triangles.<br>
+7. Each triangle has 3 points each of which has two scalar values. I
+calculate the IsoSurfaces for the traingle vertices' scalar values.
+Inside the tetrahedron, the Isosurface is a triangle. This Isosurface
+algorithm is written by me.<br>
+8. For each vertex, we have two triangles for the two scalar values.
+Now I calculate the intersection of the two triangles. This is a
+straight line. The length of the line is calculated and stored.<br>
+9. Volume measure is calculated as the cross product of the gradient of the two scalar values.<br>
+10. Divide the line length by volume measure and use this value to look
+up from a predefined color map and assign the color to the vertex.<br>
+11. Using OpenGL, I repeat these steps for all the triangles and their vertices and draw on screen with additive blending.<br>
+<br>
+<h3>Results</h3>
+I have tested my code on the dataset shockwave.raw. I have computed the
+discrete scatter plot first. Then I got the continuous scatter
+&nbsp;plot. I am attaching the two screenshots of the outputs below.<br>
+<br>
+<h5>shockwave.raw&nbsp;</h5>
+<img style="width: 814px; height: 635px;" alt="Shockwave_discrete plot" title="Shockwave_discrete plot" src="file:///Z:/WWW/shockwave.jpg"><br>
+<br>
+<img style="width: 814px; height: 637px;" alt="Shockwave_continuous_plot" title="Shockwave_continuous_plot" src="file:///Z:/WWW/ContinuousScatterplot_shockwave.jpg"><br>
+<br>
+<br>
+<h3>Remaining works</h3>
+1. Create a color lookup scheme so that the output shows the varying colors for varying density of the points.<br>
+2. Test&nbsp;more data sets.<br>
+3. If time permits, extend the code for functions which are partially constant (The case where the volume measure is 0).<br>
+</body>
+</html>
